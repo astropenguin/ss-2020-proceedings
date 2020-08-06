@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% last updated on 2018/04/01(fri) 19:57:00
+%% made by ss18syuroku
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Detailed information
+\def\j@urnalname{ss20} \def\journalID{ss20}
+\def\versi@ndate{2020/04/01}
+\def\versi@nno{ver1.00}
+\def\copyrighth@lder{ss20syuroku}
+\typeout{Package `\j@urnalname' (\versi@nno) <\versi@ndate>\space[\copyrighth@lder]}
+\typeout{ss20.sty ver1.00 (for LaTeX2e) 2020/04/01[ss20syuroku]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Default settings
+\ExecuteOptions{a4j,10pt,oneside,twocolumn,notitlepage,final}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Definition of ``MyHeadFoot''
+\makeatletter
+\def\ps@MyHeadFoot{\let\ps@jpl@in\ps@headnombre
+  \let\@oddfoot\@empty
+  \def\@oddhead{2020年度 第50回 天文・天体物理若手夏の学校\hfil}%
+  \let\@mkboth\markboth
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %% Definition of names
+%% \makeatletter
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+%% \makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\figref#1{\figurename\ref{#1}}
+\def\tabref#1{\tablename\ref{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\ps@single{%
+  \def\@oddfoot{\reset@font\hfil\thepage\hfil}%
+  \let\@evenfoot\@oddfoot
+  \def\@oddhead{\hfil\@title}%
+  \let\@evenhead\@oddhead
+  \let\@mkboth\@gobbletwo
+  \let\chaptermark\@gobble
+  \let\sectionmark\@gobble
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%文中にタイトル、アブストなどを一括して書くためのコマンド
+%二段組みでも対応可能、\abst{概要を入力}で使用
+\makeatletter
+\def\abst#1{
+\if@twocolumn
+  \twocolumn[
+\fi
+  \begin{center}
+    \let\footnote\thanks
+    {\Large \bf \@title \par}%
+    \vskip 0.5em
+  \end{center}%
+  \begin{flushright}%
+%    {\normalsize \@date}%
+%    \vskip 0.01em
+    {\large
+     \lineskip .5em
+     \begin{tabular}[t]{c}%
+       \@author
+     \end{tabular}\par}%
+  \end{flushright}%
+  \par
+  \par
+  \begin{center}
+    \textbf{\Large{Abstract}}
+  \end{center}
+  \begin{quotation}
+     {\small \noindent #1}
+  \end{quotation}\par\vskip 1.5em
+\if@twocolumn
+  ]
+\fi
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\dbltopfraction}{1.0}
+\renewcommand{\textfraction}{0.01}
+\renewcommand{\floatpagefraction}{1.0}
+\renewcommand{\dblfloatpagefraction}{1.0}
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{5}
+\setcounter{totalnumber}{10}
+\setlength{\topmargin}{0.06cm}
+\setlength{\oddsidemargin}{-0.04cm}
+\setlength{\evensidemargin}{-0.04cm}
+\setlength{\textheight}{22cm}
+\setlength{\textwidth}{16cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% included stylefiles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% equations
+\usepackage{amsmath, amssymb, amsthm, bm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %% figures
+%% \usepackage[dvipdfm]{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% references
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% page styles
+\pagestyle{MyHeadFoot}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\refname}{Reference}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\endinput
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
