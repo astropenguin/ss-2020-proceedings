@@ -2,6 +2,8 @@
 \usepackage{ss20_UTF-8}
 
 \usepackage[dvipdfmx]{graphicx}
+\newcommand{\subrm}[1]{_{\mathrm{#1}}}
+\newcommand{\suprm}[1]{^{\mathrm{#1}}}
 
 \author{谷口 暁星（名古屋大学大学院 理学研究科）}
 \title{データ科学的装置開発によるサブミリ波分光観測の高感度化}
@@ -49,6 +51,25 @@ ALMA望遠鏡（干渉計）による高感度・高空間分解能を生かし�
 \section{Methods}
 \label{s:methods}
 
+\subsection{ポジションスイッチ観測と問題点}
+
+ポジションスイッチ観測は、観測天体の座標（いわゆるON点）と別の座標（いわゆるOFF点）を交互に観測し、得られたスペクトル同士を減算することで、観測信号から地球大気放射を除去する手法である。
+観測感度$\Delta T$は以下の通りに表される。
+\begin{equation}
+    \Delta T
+    \simeq\frac{\sqrt{2}\,T\subrm{sys}}{\sqrt{\Delta\nu\, t\subrm{total}\, \eta\subrm{obs}}}.
+    \label{eq:psw-sensitivity}
+\end{equation}
+ここで$T\subrm{sys}$はシステム雑音温度、$\Delta\nu$は分光計の周波数分解能、$t\subrm{total}$は総観測時間、$\eta\subrm{obs}$は総観測時間に対するON点観測時間の割合（観測効率）である。
+ポジションスイッチ観測は観測・解析手法として簡便なため、多くの単一鏡で天体の一点観測に現在も用いられている。
+また、単一鏡によるマッピング観測でも同様にスペクトル同士の減算による大気除去が行われている。
+一方、以下に列挙した問題点により、観測装置が本来持つ感度よりも観測感度が大きく低下することが知られている。
+
+\begin{itemize}
+    \item ON・OFF点のスペクトルは共に熱雑音を含むため、減算によってノイズレベルが$\sqrt{2}$倍悪化する（そのため式\ref{eq:psw-sensitivity}の分子に$\sqrt{2}$が現れる）
+    \item 時間・空間的に異なる大気成分同士の減算を行うため、大気の変動をキャンセルできなかった場合、スペクトルのベースラインがうねる（実効的なノイズレベルを悪化させる）
+    \item ON・OFF点を同じ割合で観測する必要があるため、観測効率が低い（望遠鏡の2点間の移動時間も考慮すると、$\eta\subrm{obs}<0.5$となる）
+\end{itemize}
 
 \section{Results}
 \label{s:results}
