@@ -1,0 +1,29 @@
+name: GitHub Pages
+
+on: push
+
+jobs:
+  job:
+    name: GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo apt install latexmk
+          sudo apt install texlive-lang-japanese
+          sudo apt install texlive-latex-recommended
+          sudo apt install texlive-latex-extra
+          sudo kanji-config-updmap-sys ipaex
+      - name: Build docs
+        run: |
+          latexmk
+          mkdir public
+          cp instrument_27.pdf public
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          force_orphan: true
